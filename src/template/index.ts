@@ -18,10 +18,12 @@ const goB = (input) => {
 
 /* Results */
 
-console.time("Time")
+console.time("TimeA")
 const resultA = goA(input)
+console.timeEnd("TimeA")
+console.time("TimeB")
 const resultB = goB(input)
-console.timeEnd("Time")
+console.timeEnd("TimeB")
 
 console.log("Solution to part 1:", resultA)
 console.log("Solution to part 2:", resultB)

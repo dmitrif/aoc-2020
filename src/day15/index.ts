@@ -23,33 +23,15 @@ const goA = (input) => {
 }
 
 const goB = (input) => {
-  const lastSaid = {};
-  let lastNum;
+  let lastNum = input[input.length - 1];
+  const n = 30000000;
+  const lastSpoken = new Array(n);
+  input.forEach((v, i) => lastSpoken[v] = i + 1);
 
-  for (let i = 0; i < 30000000; i++) {
-    if (i < input.length) {
-      lastSaid[input[i]] = [i];
-      lastNum = input[i];
-      continue;
-    }
-
-    const entries = lastSaid[lastNum].length;
-    if (entries === 1) {
-      lastNum = 0;
-    } else {
-      const lastCalls = lastSaid[lastNum];
-      lastNum = lastCalls[entries - 1] - lastCalls[entries - 2];
-    }
-
-    if (typeof lastSaid[lastNum] === 'undefined') {
-      lastSaid[lastNum] = [];
-    }
-    
-    lastSaid[lastNum].push(i);
-
-    if (i % 1000000 === 0) {
-      console.log(lastNum);
-    }
+  for (let i = input.length; i < n; i++) {
+    const next = lastSpoken[lastNum] ? i - lastSpoken[lastNum] : 0;
+    lastSpoken[lastNum] = i;
+    lastNum = next;
   }
 
   return lastNum;
@@ -65,13 +47,13 @@ test(goA(prepareInput(`2,3,1`)), 78);
 test(goA(prepareInput(`3,2,1`)), 438);
 test(goA(prepareInput(`3,1,2`)), 1836);
 
-// test(goB(prepareInput(`0,3,6`)), 175594);
-// test(goB(prepareInput(`1,3,2`)), 2578);
-// test(goB(prepareInput(`2,1,3`)), 3544142);
-// test(goB(prepareInput(`1,2,3`)), 261214);
-// test(goB(prepareInput(`2,3,1`)), 6895259);
-// test(goB(prepareInput(`3,2,1`)), 18);
-// test(goB(prepareInput(`3,1,2`)), 362);
+test(goB(prepareInput(`0,3,6`)), 175594);
+test(goB(prepareInput(`1,3,2`)), 2578);
+test(goB(prepareInput(`2,1,3`)), 3544142);
+test(goB(prepareInput(`1,2,3`)), 261214);
+test(goB(prepareInput(`2,3,1`)), 6895259);
+test(goB(prepareInput(`3,2,1`)), 18);
+test(goB(prepareInput(`3,1,2`)), 362);
 
 /* Results */
 

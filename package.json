@@ -12,7 +12,7 @@
     "nodemon": "^2.0.1",
     "shelljs": "^0.8.3",
     "ts-node": "^8.5.4",
-    "typescript": "^3.7.2"
+    "typescript": "3.7.5"
   },
   "dependencies": {
     "@arrows/composition": "^1.2.1",
